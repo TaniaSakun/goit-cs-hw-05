@@ -8,6 +8,7 @@ class Constants:
     found_folder = "Found folder: {0}"
     files_coppied_to = "Files were copied to: {0}"
     delete_file_error = "Error deleting file {0}: {1}"
+   
     # Logger constants
     date_format = "%H:%M:%S"
 

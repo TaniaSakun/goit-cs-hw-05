@@ -11,21 +11,29 @@ from controllers.file_creator import generate_files, remove_generated_files
 
 source_path = "./test_folder"
 target_path = "./dist"
-loger = Logger()
+logger = Logger()
+
 
 def parse_args():
-    parser = argparse.ArgumentParser(description=Constants.sort_files)
-    parser.add_argument("-s", "--source", default=source_path, help=Constants.source_path)
-    parser.add_argument("-t", "--target", default=target_path, help=Constants.target_path)
-    return parser.parse_args()
+    try:
+        parser = argparse.ArgumentParser(description=Constants.sort_files)
+        parser.add_argument(
+            "-s", "--source", default=source_path, help=Constants.source_path
+        )
+        parser.add_argument(
+            "-t", "--target", default=target_path, help=Constants.target_path
+        )
+        return parser.parse_args()
+    except Exception as e:
+        logger.error(e)
 
 
 async def first_task(path):
     generate_files(path, depth=3, files_per_folder=randint(10, 20))
 
-    loger.config()
+    logger.config()
     await copy_files()
-    loger.info(Constants.all_files_sorted)
+    logger.info(Constants.all_files_sorted)
 
     remove_generated_files(path)
 
